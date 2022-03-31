@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>여러개 마커 표시하기</title>
+    
+</head>
+<body>
+<div id="map" style="width:100vw;height:100vh;"></div>
+<div style="position:absolute;top:5;left:5px;z-index:1;">뒤로가기</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9f475346089c1d1bc64651465468123"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(36.03326484236261, 129.36063963154203), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+    {
+        title: '학교', 
+        latlng: new kakao.maps.LatLng(36.03326484236261, 129.36063963154203)
+    },
+    {
+        title: '동물병원', 
+        latlng: new kakao.maps.LatLng(36.032796099732295, 129.3598505404734)
+    },
+    {
+        title: '강아지나라', 
+        latlng: new kakao.maps.LatLng(36.03380960719743, 129.36077098375682)
+    },
+    {
+        title: '꽃보다 강아지',
+        latlng: new kakao.maps.LatLng(36.03433399124322, 129.3605647847749)
+    }
+];
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "images/1.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(35, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
+</script>
+</body>
+</html>
